@@ -1,0 +1,18 @@
+prime_set = set()
+
+def is_prime_with_memory(number):
+    if number in prime_set:
+        return True
+    if number <= 1:
+        return False
+    for i in range(2, int(number**0.5) + 1):
+        if number % i == 0:
+            return False
+    prime_set.add(number)
+    return True
+
+num_to_check = int(input("Enter a positive integer to check: "))
+if is_prime_with_memory(num_to_check):
+    print(f"{num_to_check} is a prime number")
+else:
+    print(f"{num_to_check} is a composite number")
