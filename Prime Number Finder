@@ -6,8 +6,28 @@ def is_prime(number):
             return False
     return True
 
-num = int(input("Enter a positive integer: "))
-if is_prime(num):
-    print(f"{num} is a prime number")
-else:
-    print(f"{num} is a composite number")
+prime_set = set()
+
+def is_prime_with_memory(number):
+    if number in prime_set:
+        return True
+    if number <= 1:
+        return False
+    for i in range(2, int(number**0.5) + 1):
+        if number % i == 0:
+            return False
+    prime_set.add(number)
+    return True
+
+while True:
+    user_input = input("Enter a positive integer (or type 'exit' to stop): ")
+    if user_input.lower() == "exit":
+        break
+    try:
+        num = int(user_input)
+        if is_prime_with_memory(num):
+            print(f"{num} is a prime number")
+        else:
+            print(f"{num} is a composite number")
+    except ValueError:
+        print("Invalid input. Please enter a positive integer or 'exit'.")
